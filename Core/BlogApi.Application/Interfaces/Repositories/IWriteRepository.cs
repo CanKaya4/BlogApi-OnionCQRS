@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlogApi.Application.Interfaces
+namespace BlogApi.Application.Interfaces.Repositories
 {
     public interface IWriteRepository<T> where T : class, IEntityBase, new()
     {
@@ -14,6 +14,6 @@ namespace BlogApi.Application.Interfaces
         Task<T> UpdateAsync(T entity);
 
         Task HardDeleteAsync(T entity);
-   
+
     }
 }
