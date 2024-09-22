@@ -13,8 +13,8 @@ namespace BlogApi.Domain.Entities
         public required string Content { get; set; }
         public required int TagId { get; set; }
         public required int CategoryId { get; set; }
-        public required Tag Tag { get; set; }
-        public required ICollection<Category> Categories { get; set; }
+        public  Tag Tag { get; set; }
+        public  ICollection<Category> Categories { get; set; }
         //public required string ImagePath { get; set; }
     }
 }
