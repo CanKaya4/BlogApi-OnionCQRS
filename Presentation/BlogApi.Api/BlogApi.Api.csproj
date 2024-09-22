@@ -18,4 +18,8 @@
     <ProjectReference Include="..\..\Infrastructure\BlogApi.Persistance\BlogApi.Persistance.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>

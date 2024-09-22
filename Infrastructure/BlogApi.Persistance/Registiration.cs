@@ -1,6 +1,8 @@
-﻿using BlogApi.Application.Interfaces;
+﻿using BlogApi.Application.Interfaces.Repositories;
+using BlogApi.Application.Interfaces.UnitOfWorks;
 using BlogApi.Persistance.Context;
 using BlogApi.Persistance.Repositories;
+using BlogApi.Persistance.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,7 @@ namespace BlogApi.Persistance
 
             services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
             services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
     }

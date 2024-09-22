@@ -1,4 +1,4 @@
-﻿using BlogApi.Application.Interfaces;
+﻿using BlogApi.Application.Interfaces.Repositories;
 using BlogApi.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using System;

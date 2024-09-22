@@ -9,10 +9,10 @@ namespace BlogApi.Domain.Entities
 {
     public class Article : EntityBase
     {
-        public required string Title { get; set; }
-        public required string Content { get; set; }
-        public required int TagId { get; set; }
-        public required int CategoryId { get; set; }
+        public  string Title { get; set; }
+        public  string Content { get; set; }
+        public  int TagId { get; set; }
+        public  int CategoryId { get; set; }
         public  Tag Tag { get; set; }
         public  ICollection<Category> Categories { get; set; }
         //public required string ImagePath { get; set; }

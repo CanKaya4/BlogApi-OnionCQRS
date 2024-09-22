@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlogApi.Application.Interfaces
+namespace BlogApi.Application.Interfaces.Repositories
 {
     public interface IReadRepository<T> where T : class, IEntityBase, new()
     {
@@ -23,7 +23,7 @@ namespace BlogApi.Application.Interfaces
 
         IQueryable<T> Find(Expression<Func<T, bool>> predicate, bool enableTracking = false); //IQueryable olarak bir veri getirmek istediğimde kullanıcağım. IQueryable sorgu alınmış fakat daha işlenmemiş oluyor.
 
-        Task<int> CountAsync(Expression<Func<T,bool>>? predicate); //Toplam sayıyı almak için
+        Task<int> CountAsync(Expression<Func<T, bool>>? predicate); //Toplam sayıyı almak için
     }
 
 
