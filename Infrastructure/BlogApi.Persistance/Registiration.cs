@@ -1,4 +1,6 @@
-﻿using BlogApi.Persistance.Context;
+﻿using BlogApi.Application.Interfaces;
+using BlogApi.Persistance.Context;
+using BlogApi.Persistance.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +17,9 @@ namespace BlogApi.Persistance
         public static void AddPersistance(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
         }
+
     }
 }
