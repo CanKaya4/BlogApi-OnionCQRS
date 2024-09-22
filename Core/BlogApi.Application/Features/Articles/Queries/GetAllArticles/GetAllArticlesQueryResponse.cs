@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlogApi.Application.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace BlogApi.Application.Features.Articles.Queries.GetAllArticles
     {
         public string Title { get; set; }
         public string Content { get; set; }
-        public int CategoryId { get; set; }
+      
+
+        public TagDto Tag { get; set; } 
     }
 }

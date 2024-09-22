@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApi.Persistance", "Infr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApi.Api", "Presentation\BlogApi.Api\BlogApi.Api.csproj", "{1D5CD394-66E4-4BCC-BC81-C2EF9BD092A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogApi.Mapper", "BlogApi.Mapper\BlogApi.Mapper.csproj", "{0C008183-8E34-4F88-B114-6A6BBA87DF25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{1D5CD394-66E4-4BCC-BC81-C2EF9BD092A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D5CD394-66E4-4BCC-BC81-C2EF9BD092A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D5CD394-66E4-4BCC-BC81-C2EF9BD092A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C008183-8E34-4F88-B114-6A6BBA87DF25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C008183-8E34-4F88-B114-6A6BBA87DF25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C008183-8E34-4F88-B114-6A6BBA87DF25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C008183-8E34-4F88-B114-6A6BBA87DF25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{2A47F486-5556-425D-8527-D1922F2D5A83} = {16162C4E-C51C-4912-9E53-F1A75ACB477F}
 		{0F1D3ECA-9376-45C8-BAA0-C004F745FB06} = {16162C4E-C51C-4912-9E53-F1A75ACB477F}
 		{1D5CD394-66E4-4BCC-BC81-C2EF9BD092A2} = {5DA64A13-355F-41B2-B5E4-3CC112055B20}
+		{0C008183-8E34-4F88-B114-6A6BBA87DF25} = {9783BDCA-AC91-4B73-BFB7-2F1D6A6D678F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5B634D1-579E-455D-AF32-C8B29A54E0BB}
