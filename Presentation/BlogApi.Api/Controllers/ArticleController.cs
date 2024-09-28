@@ -1,4 +1,7 @@
-﻿using BlogApi.Application.Features.Articles.Queries.GetAllArticles;
+﻿using BlogApi.Application.Features.Articles.Command.CreateArticle;
+using BlogApi.Application.Features.Articles.Command.DeleteArticle;
+using BlogApi.Application.Features.Articles.Command.UpdateArticle;
+using BlogApi.Application.Features.Articles.Queries.GetAllArticles;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +22,24 @@ namespace BlogApi.Api.Controllers
         {
             var response = await _mediator.Send(new GetAllArticlesQueryRequest());
             return Ok(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateArticle(CreateArticleCommandRequest request)
+        {
+            await _mediator.Send(request);
+            return Ok();
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateArticle(UpdateArticleCommandRequest request)
+        {
+            await _mediator.Send(request);
+            return Ok();
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteArticle(DeleteArticleCommandRequest request)
+        {
+            await _mediator.Send(request);
+            return Ok();    
         }
     }
 }

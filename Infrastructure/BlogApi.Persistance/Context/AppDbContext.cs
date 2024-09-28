@@ -24,6 +24,7 @@ namespace BlogApi.Persistance.Context
         public DbSet<Detail> Details { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Article> Articles { get; set; }
+        public DbSet<ArticleCategory> ArticleCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

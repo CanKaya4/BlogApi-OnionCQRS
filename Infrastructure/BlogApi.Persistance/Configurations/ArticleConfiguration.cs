@@ -24,7 +24,6 @@ namespace BlogApi.Persistance.Configurations
                 TagId = 1,
                 CreatedDate = DateTime.Now,
                 IsDeleted = false,
-                CategoryId = 1,
             };
 
             Article article2 = new()
@@ -35,7 +34,7 @@ namespace BlogApi.Persistance.Configurations
                 TagId = 2,
                 CreatedDate = DateTime.Now,
                 IsDeleted = false,
-                CategoryId = 2,
+
             };
             builder.HasData(article,article2);
         }
