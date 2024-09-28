@@ -4,6 +4,7 @@ using BlogApi.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogApi.Persistance.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240928173906_mig3")]
+    partial class mig3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,6 +33,9 @@ namespace BlogApi.Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -38,12 +44,14 @@ namespace BlogApi.Persistance.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Keyword")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TagId")
@@ -63,20 +71,26 @@ namespace BlogApi.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            Content = "Okuma adresini sunt dağılımı eos sed doloremque vitae consequuntur gördüm kapının umut autem voluptatem çünkü commodi et nihil cezbelendi otobüs umut duyulmamış sed ve nisi rem dolayı çakıl quia okuma lambadaki için lakin de kalemi olduğu explicabo sıfat masaya eos quaerat filmini ışık lakin hesap laudantium doğru çobanın modi tv de ex quasi dignissimos yaptı domates et aspernatur eius ex gidecekmiş çakıl sunt quasi doloremque cezbelendi ratione modi quam için dignissimos voluptatem numquam dışarı et batarya autem voluptatem mıknatıslı ex cezbelendi accusantium eaque numquam yazın eius doloremque ut sit in filmini gidecekmiş ex aliquam minima değerli architecto consectetur et gitti.",
-                            CreatedDate = new DateTime(2024, 9, 28, 21, 16, 43, 161, DateTimeKind.Local).AddTicks(1438),
+                            CategoryId = 1,
+                            Content = "Doloremque sit gül okuma nostrum sequi sinema voluptate çorba totam sinema bundan velit ipsum eve anlamsız öyle açılmadan bundan iure için türemiş dolorem filmini sunt ki consequatur ama koyun exercitationem layıkıyla gülüyorum perferendis dağılımı mi çobanın iure ekşili consequatur amet nihil laboriosam inventore qui architecto sed ki mıknatıslı mıknatıslı hesap açılmadan masanın voluptatem domates magnam voluptate non inventore değirmeni kalemi nemo salladı veniam layıkıyla qui umut dolorem ve domates çobanın et balıkhaneye quam inventore dolorem düşünüyor perferendis esse sequi çobanın velit olduğu consequuntur layıkıyla ipsam praesentium molestiae eve quasi patlıcan consectetur voluptas gülüyorum beğendim vitae eve numquam duyulmamış eius perferendis.",
+                            CreatedDate = new DateTime(2024, 9, 28, 20, 39, 5, 974, DateTimeKind.Local).AddTicks(9250),
+                            Description = "",
                             IsDeleted = false,
+                            Keyword = "",
                             TagId = 1,
-                            Title = "Incredible Granite Chicken"
+                            Title = "Generic Soft Chair"
                         },
                         new
                         {
                             Id = 2,
-                            Content = "Magnam tv telefonu otobüs balıkhaneye hesap quasi non alias deleniti karşıdakine voluptatem bahar türemiş ekşili ona consequatur adresini sokaklarda ea karşıdakine salladı consequuntur quaerat batarya ea lambadaki nemo dicta dolorem aut bilgisayarı salladı perferendis nesciunt adanaya nisi quis voluptas çarpan amet otobüs yapacakmış voluptatem praesentium yapacakmış consequuntur otobüs reprehenderit koştum cezbelendi quam modi şafak şafak dolor enim adipisci çıktılar non eius düşünüyor sarmal balıkhaneye kapının et layıkıyla labore bundan quia.",
-                            CreatedDate = new DateTime(2024, 9, 28, 21, 16, 43, 161, DateTimeKind.Local).AddTicks(1691),
+                            CategoryId = 2,
+                            Content = "Gördüm molestiae consequuntur lambadaki sayfası consequatur dolores beatae batarya ducimus dağılımı voluptas alias un gül et cezbelendi de minima sit sıradanlıktan dolayı beatae olduğu eaque nisi aliquam tv labore sayfası rem değirmeni sit anlamsız şafak sarmal dolorem vitae magni voluptatem consequuntur consequatur adresini nostrum totam masanın sed aut doğru quia dergi ex aut deleniti quae odio un koyun nisi veniam lambadaki nostrum eve laboriosam kutusu enim gitti sinema koştum quia.",
+                            CreatedDate = new DateTime(2024, 9, 28, 20, 39, 5, 974, DateTimeKind.Local).AddTicks(9527),
+                            Description = "",
                             IsDeleted = false,
+                            Keyword = "",
                             TagId = 2,
-                            Title = "Ergonomic Rubber Bike"
+                            Title = "Unbranded Wooden Bike"
                         });
                 });
 
@@ -128,7 +142,7 @@ namespace BlogApi.Persistance.Migrations
                         {
                             Id = 1,
                             CategoryName = "ASP.NET CORE",
-                            CreatedDate = new DateTime(2024, 9, 28, 21, 16, 43, 161, DateTimeKind.Local).AddTicks(3420),
+                            CreatedDate = new DateTime(2024, 9, 28, 20, 39, 5, 975, DateTimeKind.Local).AddTicks(1493),
                             IsDeleted = false,
                             ParentId = 0,
                             Priorty = 1
@@ -137,7 +151,7 @@ namespace BlogApi.Persistance.Migrations
                         {
                             Id = 2,
                             CategoryName = "C#",
-                            CreatedDate = new DateTime(2024, 9, 28, 21, 16, 43, 161, DateTimeKind.Local).AddTicks(3421),
+                            CreatedDate = new DateTime(2024, 9, 28, 20, 39, 5, 975, DateTimeKind.Local).AddTicks(1494),
                             IsDeleted = false,
                             ParentId = 0,
                             Priorty = 2
@@ -146,7 +160,7 @@ namespace BlogApi.Persistance.Migrations
                         {
                             Id = 3,
                             CategoryName = "ASP.NET CORE 2.0",
-                            CreatedDate = new DateTime(2024, 9, 28, 21, 16, 43, 161, DateTimeKind.Local).AddTicks(3423),
+                            CreatedDate = new DateTime(2024, 9, 28, 20, 39, 5, 975, DateTimeKind.Local).AddTicks(1496),
                             IsDeleted = false,
                             ParentId = 1,
                             Priorty = 1
@@ -155,7 +169,7 @@ namespace BlogApi.Persistance.Migrations
                         {
                             Id = 4,
                             CategoryName = "C# 6.0",
-                            CreatedDate = new DateTime(2024, 9, 28, 21, 16, 43, 161, DateTimeKind.Local).AddTicks(3481),
+                            CreatedDate = new DateTime(2024, 9, 28, 20, 39, 5, 975, DateTimeKind.Local).AddTicks(1498),
                             IsDeleted = false,
                             ParentId = 2,
                             Priorty = 1
@@ -198,28 +212,28 @@ namespace BlogApi.Persistance.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 9, 28, 21, 16, 43, 162, DateTimeKind.Local).AddTicks(8798),
-                            Description = "Eum et tv ut voluptatum.",
+                            CreatedDate = new DateTime(2024, 9, 28, 20, 39, 5, 976, DateTimeKind.Local).AddTicks(8989),
+                            Description = "Labore beatae blanditiis hesap quam.",
                             IsDeleted = false,
-                            Title = "Explicabo."
+                            Title = "Amet."
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 9, 28, 21, 16, 43, 162, DateTimeKind.Local).AddTicks(8835),
-                            Description = "Nemo açılmadan bilgiyasayarı praesentium ona.",
+                            CreatedDate = new DateTime(2024, 9, 28, 20, 39, 5, 976, DateTimeKind.Local).AddTicks(9049),
+                            Description = "Tv orta sandalye inventore mıknatıslı.",
                             IsDeleted = true,
-                            Title = "Orta ki."
+                            Title = "Vitae suscipit."
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 4,
-                            CreatedDate = new DateTime(2024, 9, 28, 21, 16, 43, 162, DateTimeKind.Local).AddTicks(8872),
-                            Description = "Eaque dolores sıfat gidecekmiş beğendim.",
+                            CreatedDate = new DateTime(2024, 9, 28, 20, 39, 5, 976, DateTimeKind.Local).AddTicks(9086),
+                            Description = "Mutlu qui consequatur sed aut.",
                             IsDeleted = false,
-                            Title = "Sit laudantium labore."
+                            Title = "Masanın gitti incidunt."
                         });
                 });
 
@@ -250,23 +264,23 @@ namespace BlogApi.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 9, 28, 21, 16, 43, 164, DateTimeKind.Local).AddTicks(4300),
+                            CreatedDate = new DateTime(2024, 9, 28, 20, 39, 5, 978, DateTimeKind.Local).AddTicks(9568),
                             IsDeleted = false,
-                            Name = "Electronics"
+                            Name = "Toys"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 9, 28, 21, 16, 43, 164, DateTimeKind.Local).AddTicks(4307),
+                            CreatedDate = new DateTime(2024, 9, 28, 20, 39, 5, 978, DateTimeKind.Local).AddTicks(9625),
                             IsDeleted = false,
-                            Name = "Tools"
+                            Name = "Shoes, Home & Books"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 9, 28, 21, 16, 43, 164, DateTimeKind.Local).AddTicks(5701),
+                            CreatedDate = new DateTime(2024, 9, 28, 20, 39, 5, 978, DateTimeKind.Local).AddTicks(9641),
                             IsDeleted = true,
-                            Name = "Tools, Computers & Garden"
+                            Name = "Garden, Clothing & Games"
                         });
                 });
 

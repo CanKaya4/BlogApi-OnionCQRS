@@ -24,6 +24,6 @@ namespace BlogApi.Domain.Entities
         public  int Priorty { get; set; }
         public  string CategoryName { get; set; }
         public ICollection<Detail> Details { get; set; }
-        public ICollection<Article> Articles { get; set; }
+        public ICollection<ArticleCategory> ArticleCategories { get; set; }
     }
 }

@@ -39,6 +39,9 @@ namespace BlogApi.Persistance.Repositories
            
         }
 
-      
+        public async Task HardDeleteRangeAsync(IList<T> entity)
+        {
+            await Task.Run(() => Table.RemoveRange(entity));
+        }
     }
 }
