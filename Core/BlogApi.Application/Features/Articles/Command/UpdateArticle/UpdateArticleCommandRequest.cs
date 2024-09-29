@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogApi.Application.Features.Articles.Command.UpdateArticle
 {
-    public class UpdateArticleCommandRequest : IRequest
+    public class UpdateArticleCommandRequest : IRequest<Unit>
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;

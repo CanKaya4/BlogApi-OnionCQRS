@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace BlogApi.Application.Features.Articles.Command.CreateArticle
 {
-    public class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommandRequest>
+    public class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommandRequest, Unit>
     {
         private readonly IUnitOfWork _unitOfWork;
         public CreateArticleCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task Handle(CreateArticleCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateArticleCommandRequest request, CancellationToken cancellationToken)
         {
             Article article = new(request.Title,request.Content,request.TagId,request.Keyword,request.Description);
           
@@ -34,6 +34,7 @@ namespace BlogApi.Application.Features.Articles.Command.CreateArticle
                 }
                 await _unitOfWork.SaveAsync();
             }
+            return Unit.Value;
         }
     }
 }

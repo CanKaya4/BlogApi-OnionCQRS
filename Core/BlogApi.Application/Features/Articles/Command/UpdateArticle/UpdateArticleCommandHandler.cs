@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlogApi.Application.Features.Articles.Command.UpdateArticle
 {
-    public class UpdateArticleCommandHandler : IRequestHandler<UpdateArticleCommandRequest>
+    public class UpdateArticleCommandHandler : IRequestHandler<UpdateArticleCommandRequest, Unit>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICustomMapper _customMapper;
@@ -19,7 +19,7 @@ namespace BlogApi.Application.Features.Articles.Command.UpdateArticle
             _customMapper = customMapper;
             _unitOfWork = unitOfWork;
         }
-        public async Task Handle(UpdateArticleCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateArticleCommandRequest request, CancellationToken cancellationToken)
         { 
             var article = await _unitOfWork.GetReadRepository<Article>().GetAsync(x=>x.Id == request.Id && !x.IsDeleted);
             if (article != null)
@@ -45,6 +45,7 @@ namespace BlogApi.Application.Features.Articles.Command.UpdateArticle
                     await _unitOfWork.SaveAsync();
                 }
             }
+            return Unit.Value;
         }
     }
 }
