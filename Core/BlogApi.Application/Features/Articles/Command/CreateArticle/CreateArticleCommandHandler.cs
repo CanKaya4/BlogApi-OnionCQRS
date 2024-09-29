@@ -18,7 +18,7 @@ namespace BlogApi.Application.Features.Articles.Command.CreateArticle
         }
         public async Task Handle(CreateArticleCommandRequest request, CancellationToken cancellationToken)
         {
-            Article article = new(request.Title,request.Content,request.TagId,request.Keyword,request.Description ?? "Description null geldi.");
+            Article article = new(request.Title,request.Content,request.TagId,request.Keyword,request.Description);
           
 
             await _unitOfWork.GetWriteRepository<Article>().AddAsync(article);
