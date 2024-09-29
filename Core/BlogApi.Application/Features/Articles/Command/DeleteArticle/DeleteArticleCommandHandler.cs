@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace BlogApi.Application.Features.Articles.Command.DeleteArticle
 {
-    public class DeleteArticleCommandHandler : IRequestHandler<DeleteArticleCommandRequest>
+    public class DeleteArticleCommandHandler : IRequestHandler<DeleteArticleCommandRequest, Unit>
     {
         private readonly IUnitOfWork _unitOfWork;
         public DeleteArticleCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task Handle(DeleteArticleCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteArticleCommandRequest request, CancellationToken cancellationToken)
         {
             var article = await _unitOfWork.GetReadRepository<Article>().GetAsync(x => x.Id == request.Id);
 
@@ -27,6 +27,7 @@ namespace BlogApi.Application.Features.Articles.Command.DeleteArticle
                 await _unitOfWork.GetWriteRepository<Article>().UpdateAsync(article);
                 await _unitOfWork.SaveAsync();
             }
+            return Unit.Value;
         }
     }
 }

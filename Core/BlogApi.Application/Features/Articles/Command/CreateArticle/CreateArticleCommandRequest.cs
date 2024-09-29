@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogApi.Application.Features.Articles.Command.CreateArticle
 {
-    public class CreateArticleCommandRequest : IRequest
+    public class CreateArticleCommandRequest : IRequest<Unit>
     {
         public string Title { get; set; } = string.Empty;
         public string Content { get; set; } = string.Empty;
