@@ -1,6 +1,7 @@
 using BlogApi.Persistance;
 using BlogApi.Application;
 using BlogApi.Mapper;
+using BlogApi.Application.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +28,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.ConfigureExceptionHandlingMiddleware(); 
 app.UseAuthorization();
 
 app.MapControllers();
