@@ -37,8 +37,8 @@ namespace BlogApi.Application.Features.Articles.Queries.GetAllArticles
             //}
             var map = _customMapper.Map<GetAllArticlesQueryResponse, Article>(articles);
 
-            // return map;
-            throw new Exception("Hata mesajı");
+             return map;
+           // throw new Exception("Hata mesajı");
         }
     }
 }
