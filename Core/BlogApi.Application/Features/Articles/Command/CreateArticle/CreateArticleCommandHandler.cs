@@ -1,4 +1,5 @@
-﻿using BlogApi.Application.Interfaces.UnitOfWorks;
+﻿using BlogApi.Application.Features.Articles.Rules;
+using BlogApi.Application.Interfaces.UnitOfWorks;
 using BlogApi.Domain.Entities;
 using MediatR;
 using System;
@@ -12,12 +13,19 @@ namespace BlogApi.Application.Features.Articles.Command.CreateArticle
     public class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommandRequest, Unit>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CreateArticleCommandHandler(IUnitOfWork unitOfWork)
+        private readonly ArticleRules _articleRules;
+        public CreateArticleCommandHandler(IUnitOfWork unitOfWork, ArticleRules articleRules)
         {
             _unitOfWork = unitOfWork;
+            _articleRules = articleRules;
         }
         public async Task<Unit> Handle(CreateArticleCommandRequest request, CancellationToken cancellationToken)
         {
+
+            IList<Article> articles = await _unitOfWork.GetReadRepository<Article>().GetAllAsync();
+
+            await _articleRules.ArticleTitleMustBeNotSame(articles, request.Title);
+           
             Article article = new(request.Title,request.Content,request.TagId,request.Keyword,request.Description);
           
 
