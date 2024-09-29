@@ -1,5 +1,6 @@
 ﻿using BlogApi.Application.Interfaces.Repositories;
 using BlogApi.Application.Interfaces.UnitOfWorks;
+using BlogApi.Domain.Entities;
 using BlogApi.Persistance.Context;
 using BlogApi.Persistance.Repositories;
 using BlogApi.Persistance.UnitOfWorks;
@@ -23,6 +24,16 @@ namespace BlogApi.Persistance
             services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
             services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddIdentityCore<User>(opt =>
+            {
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequiredLength = 2;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireDigit = false;
+                opt.SignIn.RequireConfirmedEmail = false;
+            }).AddRoles<Role>().AddEntityFrameworkStores<AppDbContext>();
         }
 
     }
