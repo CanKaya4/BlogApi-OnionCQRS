@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BlogApi.Mapper\BlogApi.Mapper.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\BlogApi.Infrastructure\BlogApi.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\BlogApi.Persistance\BlogApi.Persistance.csproj" />
   </ItemGroup>
 

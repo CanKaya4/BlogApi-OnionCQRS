@@ -1,5 +1,6 @@
 using BlogApi.Persistance;
 using BlogApi.Application;
+using BlogApi.Infrastructure;
 using BlogApi.Mapper;
 using BlogApi.Application.Exceptions;
 
@@ -17,11 +18,22 @@ builder.Configuration.SetBasePath(env.ContentRootPath)
     .AddJsonFile("appsettings.json", optional:false)
     .AddJsonFile($"appsettings.{env.EnvironmentName}.json",optional:true);
 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowAllOrigins", builder =>
+//    {
+//        builder.AllowAnyOrigin()
+//               .AllowAnyMethod()
+//               .AllowAnyHeader();
+//    });
+//});
+
 builder.Services.AddPersistance(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddCustomMapper();
 var app = builder.Build();
-
+//app.UseCors("AllowAllOrigins");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
