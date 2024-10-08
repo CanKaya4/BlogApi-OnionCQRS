@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogApi.Application.Features.Articles.Exceptions
 {
-    public class ArticleTitleMustNotBeSameException : BaseExceptions
+    public class ArticleTitleMustNotBeSameException : BaseException
     {
         public ArticleTitleMustNotBeSameException() : base("Makale başlığı zaten var!")
         {

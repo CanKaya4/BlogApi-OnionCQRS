@@ -1,7 +1,10 @@
-﻿using BlogApi.Application.Features.Articles.Rules;
+﻿using BlogApi.Application.Bases;
+using BlogApi.Application.Features.Articles.Rules;
+using BlogApi.Application.Interfaces.AutoMapper;
 using BlogApi.Application.Interfaces.UnitOfWorks;
 using BlogApi.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +13,12 @@ using System.Threading.Tasks;
 
 namespace BlogApi.Application.Features.Articles.Command.CreateArticle
 {
-    public class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommandRequest, Unit>
+    public class CreateArticleCommandHandler : BaseHandler, IRequestHandler<CreateArticleCommandRequest, Unit>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ArticleRules _articleRules;
-        public CreateArticleCommandHandler(IUnitOfWork unitOfWork, ArticleRules articleRules)
+        public CreateArticleCommandHandler( ArticleRules articleRules,ICustomMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
         {
-            _unitOfWork = unitOfWork;
             _articleRules = articleRules;
         }
         public async Task<Unit> Handle(CreateArticleCommandRequest request, CancellationToken cancellationToken)
@@ -25,14 +27,14 @@ namespace BlogApi.Application.Features.Articles.Command.CreateArticle
             IList<Article> articles = await _unitOfWork.GetReadRepository<Article>().GetAllAsync();
 
             await _articleRules.ArticleTitleMustBeNotSame(articles, request.Title);
-           
-            Article article = new(request.Title,request.Content,request.TagId,request.Keyword,request.Description);
-          
+
+            Article article = new(request.Title, request.Content, request.TagId, request.Keyword, request.Description);
+
 
             await _unitOfWork.GetWriteRepository<Article>().AddAsync(article);
-            if(await _unitOfWork.SaveAsync() > 0)
+            if (await _unitOfWork.SaveAsync() > 0)
             {
-                foreach(int item in request.CategoryIds)
+                foreach (int item in request.CategoryIds)
                 {
                     await _unitOfWork.GetWriteRepository<ArticleCategory>().AddAsync(new()
                     {

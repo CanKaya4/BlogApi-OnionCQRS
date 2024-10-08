@@ -1,6 +1,9 @@
-﻿using BlogApi.Application.Interfaces.UnitOfWorks;
+﻿using BlogApi.Application.Bases;
+using BlogApi.Application.Interfaces.AutoMapper;
+using BlogApi.Application.Interfaces.UnitOfWorks;
 using BlogApi.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +12,10 @@ using System.Threading.Tasks;
 
 namespace BlogApi.Application.Features.Articles.Command.DeleteArticle
 {
-    public class DeleteArticleCommandHandler : IRequestHandler<DeleteArticleCommandRequest, Unit>
+    public class DeleteArticleCommandHandler :BaseHandler, IRequestHandler<DeleteArticleCommandRequest, Unit>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public DeleteArticleCommandHandler(IUnitOfWork unitOfWork)
+        public DeleteArticleCommandHandler(ICustomMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
         {
-            _unitOfWork = unitOfWork;
         }
         public async Task<Unit> Handle(DeleteArticleCommandRequest request, CancellationToken cancellationToken)
         {
