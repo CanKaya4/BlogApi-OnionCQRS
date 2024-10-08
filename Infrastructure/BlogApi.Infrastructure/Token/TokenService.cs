@@ -48,12 +48,31 @@ namespace BlogApi.Infrastructure.Token
 
         public string GenerateRefreshToken()
         {
-            throw new NotImplementedException();
+            var randomNumber = new Byte[64];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
         }
 
-        public ClaimsPrincipal? GetPrincipalFromExpriedToken()
+        public ClaimsPrincipal? GetPrincipalFromExpriedToken(string? token)
         {
-            throw new NotImplementedException();
+            TokenValidationParameters tokenValidationParameters = new()
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenSettings.Secret)),
+                ValidateLifetime = false,
+                
+            };
+
+            JwtSecurityTokenHandler tokenHandler = new();
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
+            if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new SecurityTokenException("Token bulunamadı.");
+            }
+            return principal;
         }
     }
 }
