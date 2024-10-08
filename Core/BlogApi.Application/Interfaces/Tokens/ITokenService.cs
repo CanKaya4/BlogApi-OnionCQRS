@@ -15,6 +15,6 @@ namespace BlogApi.Application.Interfaces.Tokens
 
         string GenerateRefreshToken();
 
-        ClaimsPrincipal? GetPrincipalFromExpriedToken();
+        ClaimsPrincipal? GetPrincipalFromExpriedToken(string? token);
     }
 }
