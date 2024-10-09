@@ -3,6 +3,7 @@ using BlogApi.Application.Features.Articles.Command.DeleteArticle;
 using BlogApi.Application.Features.Articles.Command.UpdateArticle;
 using BlogApi.Application.Features.Articles.Queries.GetAllArticles;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace BlogApi.Api.Controllers
             _mediator = mediator;
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllArticles()
         {
             var response = await _mediator.Send(new GetAllArticlesQueryRequest());
