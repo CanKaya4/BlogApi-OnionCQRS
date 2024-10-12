@@ -11,8 +11,6 @@ namespace BlogApi.Application.Features.Articles.Queries.GetAllArticles
     {
         public string Title { get; set; }
         public string Content { get; set; }
-      
-
         public TagDto Tag { get; set; } 
     }
 }
