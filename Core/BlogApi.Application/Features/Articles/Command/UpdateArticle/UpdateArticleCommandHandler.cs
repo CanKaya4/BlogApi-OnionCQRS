@@ -19,7 +19,7 @@ namespace BlogApi.Application.Features.Articles.Command.UpdateArticle
         }
         public async Task<Unit> Handle(UpdateArticleCommandRequest request, CancellationToken cancellationToken)
         { 
-            var article = await _unitOfWork.GetReadRepository<Article>().GetAsync(x=>x.Id == request.Id && !x.IsDeleted);
+            Article? article = await _unitOfWork.GetReadRepository<Article>().GetAsync(x=>x.Id == request.Id && !x.IsDeleted);
             if (article != null)
             {
                 var map = _mapper.Map<Article, UpdateArticleCommandRequest>(request);

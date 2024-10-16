@@ -15,7 +15,6 @@ namespace BlogApi.Application.Features.Articles.Command.CreateArticle
 {
     public class CreateArticleCommandHandler : BaseHandler, IRequestHandler<CreateArticleCommandRequest, Unit>
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly ArticleRules _articleRules;
         public CreateArticleCommandHandler( ArticleRules articleRules,ICustomMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
         {

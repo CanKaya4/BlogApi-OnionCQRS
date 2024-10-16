@@ -2,6 +2,7 @@
 using BlogApi.Application.Features.Tags.Commands.DeleteTag;
 using BlogApi.Application.Features.Tags.Commands.UpdateTag;
 using BlogApi.Application.Features.Tags.Queries.GetAllTags;
+using BlogApi.Application.Features.Tags.Queries.GetByIdTags;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +42,17 @@ namespace BlogApi.Api.Controllers
         {
             await _mediator.Send(request);
             return Ok();
+        }
+        [HttpGet("{id}")]  
+        public async Task<IActionResult> GetByIdTag(int id)
+        {
+            var query = new GetByIdTagsQueryRequest(id);
+            var result =  await _mediator.Send(query);
+            if(result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
         }
     }
 }

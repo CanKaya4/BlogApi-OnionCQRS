@@ -19,7 +19,7 @@ namespace BlogApi.Application.Features.Articles.Command.DeleteArticle
         }
         public async Task<Unit> Handle(DeleteArticleCommandRequest request, CancellationToken cancellationToken)
         {
-            var article = await _unitOfWork.GetReadRepository<Article>().GetAsync(x => x.Id == request.Id);
+            Article? article = await _unitOfWork.GetReadRepository<Article>().GetAsync(x => x.Id == request.Id);
 
             if (article != null)
             {
