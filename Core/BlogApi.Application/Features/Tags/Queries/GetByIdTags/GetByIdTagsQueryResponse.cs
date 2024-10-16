@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlogApi.Application.Features.Tags.Queries.GetAllTags
+namespace BlogApi.Application.Features.Tags.Queries.GetByIdTags
 {
-    public class GetAllTagsQueryResponse
+    public class GetByIdTagsQueryResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }

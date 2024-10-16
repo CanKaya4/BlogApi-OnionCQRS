@@ -24,6 +24,7 @@ namespace BlogApi.Domain.Entities
         public  string Title { get; set; } 
         public  string Content { get; set; } 
         public  int TagId { get; set; }
+        public  int ReadCount { get; set; }
         public string? Keyword { get; set; } 
         public string? Description { get; set; } 
         public  Tag Tag { get; set; }

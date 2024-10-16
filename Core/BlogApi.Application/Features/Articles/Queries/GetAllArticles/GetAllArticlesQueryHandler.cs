@@ -23,22 +23,24 @@ namespace BlogApi.Application.Features.Articles.Queries.GetAllArticles
         }
         public async Task<IList<GetAllArticlesQueryResponse>> Handle(GetAllArticlesQueryRequest request, CancellationToken cancellationToken)
         {
-            var articles = await _unitOfWork.GetReadRepository<Article>().GetAllAsync(include: x => x.Include(b => b.Tag));
+            var articles = await _unitOfWork.GetReadRepository<Article>().GetAllAsync(include: x => x.Include(b => b.Tag).Include(b=>b.ArticleCategories).ThenInclude(ac=>ac.Category));
             var tag = _customMapper.Map<TagDto, Tag>(new Tag());
-            //List<GetAllArticlesQueryResponse> response = new();
-            //foreach (var item in articles)
-            //{
-            //    response.Add(new GetAllArticlesQueryResponse()
-            //    {
-            //        Title = item.Title,
 
-            //        Content = item.Content
-            //    });
-            //}
-            var map = _customMapper.Map<GetAllArticlesQueryResponse, Article>(articles);
+            //var map = _customMapper.Map<GetAllArticlesQueryResponse, Article>(articles);
 
-             return map;
-           // throw new Exception("Hata mesajı");
+            // return map;
+            var articleResponse = articles.Select(item => new GetAllArticlesQueryResponse
+            {
+                Id = item.Id,
+                Title = item.Title,
+                Content = item.Content,
+                Keyword = item.Keyword,
+                IsDeleted = item.IsDeleted,
+                Tag = _customMapper.Map<TagDto>(item.Tag),
+                CategoryNames = item.ArticleCategories.Select(ac=>ac.Category.CategoryName).ToList(),
+
+            }).ToList();
+            return articleResponse;
         }
     }
 }

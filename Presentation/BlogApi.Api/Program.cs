@@ -21,15 +21,15 @@ builder.Configuration.SetBasePath(env.ContentRootPath)
     .AddJsonFile("appsettings.json", optional:false)
     .AddJsonFile($"appsettings.{env.EnvironmentName}.json",optional:true);
 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowAllOrigins", builder =>
-//    {
-//        builder.AllowAnyOrigin()
-//               .AllowAnyMethod()
-//               .AllowAnyHeader();
-//    });
-//});
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 builder.Services.AddPersistance(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -65,9 +65,9 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
-//app.UseCors("AllowAllOrigins");
+app.UseCors("AllowAllOrigins");
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
