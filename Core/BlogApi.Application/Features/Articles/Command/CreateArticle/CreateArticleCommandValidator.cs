@@ -22,6 +22,7 @@ namespace BlogApi.Application.Features.Articles.Command.CreateArticle
             RuleFor(x => x.Description).NotEmpty().WithName("Açıklama");
 
             RuleFor(x => x.CategoryIds).NotEmpty().Must(x => x.Any()).WithName("Kategoriler");
+             
 
         }
     }

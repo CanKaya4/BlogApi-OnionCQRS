@@ -1,5 +1,6 @@
 ﻿using BlogApi.Application.Bases;
 using BlogApi.Application.Features.Articles.Rules;
+using BlogApi.Application.Helpers.SlugHelper;
 using BlogApi.Application.Interfaces.AutoMapper;
 using BlogApi.Application.Interfaces.UnitOfWorks;
 using BlogApi.Domain.Entities;
@@ -27,7 +28,9 @@ namespace BlogApi.Application.Features.Articles.Command.CreateArticle
 
             await _articleRules.ArticleTitleMustBeNotSame(articles, request.Title);
 
-            Article article = new(request.Title, request.Content, request.TagId, request.Keyword, request.Description);
+            string slug = SlugHelper.CreateSlug(request.Title);
+
+            Article article = new(request.Title, request.Content, request.TagId, request.Keyword, request.Description, slug);
 
 
             await _unitOfWork.GetWriteRepository<Article>().AddAsync(article);
@@ -46,4 +49,6 @@ namespace BlogApi.Application.Features.Articles.Command.CreateArticle
             return Unit.Value;
         }
     }
+
+
 }

@@ -13,7 +13,10 @@ namespace BlogApi.Application.Features.Articles.Queries.GetByIdArticle
         public string Title { get; set; }
         public string Content { get; set; }
         public string Keyword { get; set; }
+        public string Slug { get; set; }
+        public string Description { get; set; }
         public bool IsDeleted { get; set; }
+        
         public TagDto Tag { get; set; }
         public List<string> CategoryNames { get; set; }
     }

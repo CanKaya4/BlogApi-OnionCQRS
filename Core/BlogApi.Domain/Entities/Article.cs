@@ -13,17 +13,19 @@ namespace BlogApi.Domain.Entities
         {
             
         }
-        public Article(string title, string content, int tagId, string keyword, string description)
+        public Article(string title, string content, int tagId, string keyword, string description, string slug)
         {
             Title = title;
             Content = content;
             TagId = tagId;
             Keyword = keyword;
             Description = description;
+            Slug = slug;
         }
         public  string Title { get; set; } 
         public  string Content { get; set; } 
         public  int TagId { get; set; }
+        public string? Slug { get; set; } 
         public  int ReadCount { get; set; }
         public string? Keyword { get; set; } 
         public string? Description { get; set; } 

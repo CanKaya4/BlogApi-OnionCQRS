@@ -12,7 +12,8 @@ namespace BlogApi.Application.Features.Categories.Command.UpdateCategory
         public int Id { get; set; }
         public int ParentId { get; set; }
         public int Priorty { get; set; }
+        public bool isDeleted { get; set; }
         public string CategoryName { get; set; }
-        public IList<int> ArticleIds { get; set; }  
+     //   public IList<int> ArticleIds { get; set; }  
     }
 }

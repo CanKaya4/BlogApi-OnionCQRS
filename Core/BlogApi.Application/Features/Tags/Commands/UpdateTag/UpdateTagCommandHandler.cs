@@ -20,7 +20,7 @@ namespace BlogApi.Application.Features.Tags.Commands.UpdateTag
 
         public async Task<Unit> Handle(UpdateTagCommandRequest request, CancellationToken cancellationToken)
         {
-            Tag? tag = await _unitOfWork.GetReadRepository<Tag>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
+            Tag? tag = await _unitOfWork.GetReadRepository<Tag>().GetAsync(x => x.Id == request.Id);
 
             if(tag != null)
             {

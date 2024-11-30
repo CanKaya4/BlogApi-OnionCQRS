@@ -3,6 +3,10 @@ using BlogApi.Application.Features.Articles.Command.DeleteArticle;
 using BlogApi.Application.Features.Articles.Command.IncrementViewCountArticle;
 using BlogApi.Application.Features.Articles.Command.UpdateArticle;
 using BlogApi.Application.Features.Articles.Queries.GetAllArticles;
+using BlogApi.Application.Features.Articles.Queries.GetArticleBySearch;
+using BlogApi.Application.Features.Articles.Queries.GetArticlesByCategoryWithPagination;
+using BlogApi.Application.Features.Articles.Queries.GetArticlesByTagWithPagination;
+using BlogApi.Application.Features.Articles.Queries.GetArticleWithPagination;
 using BlogApi.Application.Features.Articles.Queries.GetByIdArticle;
 using BlogApi.Application.Features.Articles.Queries.GetTotalArticleCount;
 using BlogApi.Application.Features.Articles.Queries.GetTotalReadCountArticles;
@@ -27,6 +31,49 @@ namespace BlogApi.Api.Controllers
         public async Task<IActionResult> GetAllArticles()
         {
             var response = await _mediator.Send(new GetAllArticlesQueryRequest());
+            return Ok(response);
+        }
+        [HttpGet("GetByCategory")]
+        public async Task<IActionResult> GetArticlesByCategory([FromQuery] GetArticlesByCategoryWithPaginationRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+        [HttpGet("GetByTag")]
+        public async Task<IActionResult> GetArticlesByTag([FromQuery] GetArticlesByTagWithPaginationRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+        [HttpGet("GetPagedArticles")]
+        public async Task<IActionResult> GetPagedArticles([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10, [FromQuery] string searchKeyword = null, [FromQuery] int? categoryId = null)
+        {
+            // Sayfalama ve diğer filtre bilgilerini içeren istek sınıfını oluşturuyoruz
+            var request = new GetArticleWithPaginationRequest()
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                SearchKeyword = searchKeyword,  // Arama kelimesi ekleyebilirsiniz
+                CategoryId = categoryId       // Kategori ID'si ekleyebilirsiniz
+            };
+
+            // Sayfalı veriyi alıyoruz
+            var response = await _mediator.Send(request);
+
+            // Yanıtı döndürüyoruz
+            return Ok(response);
+        }
+        [HttpGet("search")]
+        public async Task<ActionResult<GetArticleBySearchResponse>> SearchArticles([FromQuery] string searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return BadRequest("Arama terimi boş olamaz.");
+            }
+
+            var query = new GetArticleBySearchRequest(searchTerm);
+            var response = await _mediator.Send(query);
+
             return Ok(response);
         }
         [HttpPost]

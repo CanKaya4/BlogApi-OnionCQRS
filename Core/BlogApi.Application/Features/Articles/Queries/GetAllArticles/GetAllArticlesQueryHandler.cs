@@ -23,8 +23,10 @@ namespace BlogApi.Application.Features.Articles.Queries.GetAllArticles
         }
         public async Task<IList<GetAllArticlesQueryResponse>> Handle(GetAllArticlesQueryRequest request, CancellationToken cancellationToken)
         {
+
             var articles = await _unitOfWork.GetReadRepository<Article>().GetAllAsync(include: x => x.Include(b => b.Tag).Include(b=>b.ArticleCategories).ThenInclude(ac=>ac.Category));
             var tag = _customMapper.Map<TagDto, Tag>(new Tag());
+
 
             //var map = _customMapper.Map<GetAllArticlesQueryResponse, Article>(articles);
 
@@ -35,6 +37,10 @@ namespace BlogApi.Application.Features.Articles.Queries.GetAllArticles
                 Title = item.Title,
                 Content = item.Content,
                 Keyword = item.Keyword,
+                Description = item.Description,
+                Slug = item.Slug,
+                CreatedDate = item.CreatedDate,
+                ReadCount = item.ReadCount,
                 IsDeleted = item.IsDeleted,
                 Tag = _customMapper.Map<TagDto>(item.Tag),
                 CategoryNames = item.ArticleCategories.Select(ac=>ac.Category.CategoryName).ToList(),

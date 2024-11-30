@@ -36,6 +36,7 @@ namespace BlogApi.Application.Features.Articles.Queries.GetByIdArticle
                 Title = article.Title,
                 Content = article.Content,
                 Keyword = article.Keyword,
+                Slug = article.Slug,
                 IsDeleted = article.IsDeleted,
                 Tag = tag,
                 CategoryNames = article.ArticleCategories.Select(ac=>ac.Category.CategoryName).ToList(),

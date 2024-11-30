@@ -20,7 +20,7 @@ namespace BlogApi.Application.Features.Categories.Command.UpdateCategory
 
         public async Task<Unit> Handle(UpdateCategoryCommandRequest request, CancellationToken cancellationToken)
         {
-            Category? category = await _unitOfWork.GetReadRepository<Category>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
+            Category? category = await _unitOfWork.GetReadRepository<Category>().GetAsync(x => x.Id == request.Id);
 
             if(category != null)
             {
@@ -32,14 +32,14 @@ namespace BlogApi.Application.Features.Categories.Command.UpdateCategory
                 {
                     await _unitOfWork.GetWriteRepository<ArticleCategory>().HardDeleteRangeAsync(articleCategory);
 
-                    foreach(var item in request.ArticleIds)
-                    {
-                        await _unitOfWork.GetWriteRepository<ArticleCategory>().AddAsync(new()
-                        {
-                            CategoryId = category.Id,
-                            ArticleId = item
-                        });
-                    }
+                    //foreach(var item in request.ArticleIds)
+                    //{
+                    //    await _unitOfWork.GetWriteRepository<ArticleCategory>().AddAsync(new()
+                    //    {
+                    //        CategoryId = category.Id,
+                    //        ArticleId = item
+                    //    });
+                    //}
                     await _unitOfWork.GetWriteRepository<Category>().UpdateAsync(map);
                     await _unitOfWork.SaveAsync();
                 }
